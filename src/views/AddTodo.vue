@@ -20,7 +20,7 @@ const clearTodoInput = () => {
 
 const todoesStore = useTodoesStore();
 
-const triggerAddTodo = () => {
+const handleAddTodo = () => {
     if (todoData.todoName === '' || todoData.todoSummary === '') {
         console.log("please input something");
         return;
@@ -28,7 +28,6 @@ const triggerAddTodo = () => {
 
     todoesStore.addTodo(todoData.todoName, todoData.todoDate, todoData.todoSummary);
     clearTodoInput();
-    console.log(todoesStore.todoes);
 }
 
 </script>
@@ -50,7 +49,7 @@ const triggerAddTodo = () => {
             </ol>
         </ul>
         <div id="buttonGroup">
-            <button class="functionBtn" id="addTodoBtn" @click="triggerAddTodo">Add</button>
+            <button class="functionBtn" id="addTodoBtn" @click="handleAddTodo">Add</button>
             <button class="functionBtn" id="clearBtn" @click="clearTodoInput">Clear</button>
         </div>
     </div>

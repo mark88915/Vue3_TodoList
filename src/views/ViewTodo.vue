@@ -1,10 +1,10 @@
 <script setup>
     import { useTodoesStore } from '../stores/todoesStore.js';
     import { storeToRefs } from 'pinia';
-    import TodoItem from '../components/ViewTodo/todoItem.vue';
+    import TodoItem from '../components/ViewTodo/TodoItem.vue';
 
-    const store = useTodoesStore();
-    const { todoes } = storeToRefs(store);
+    const todoesStore = useTodoesStore();
+    const { todoes } = storeToRefs(todoesStore);
 </script>
 
 <template>
@@ -12,3 +12,11 @@
         <TodoItem v-for="todo in todoes" :todo-data="todo" />
     </div>
 </template>
+
+<style scoped>
+#todoList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+</style>

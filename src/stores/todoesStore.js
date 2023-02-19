@@ -13,5 +13,18 @@ export const useTodoesStore = defineStore('todoes', () => {
         });
     }
 
-    return {todoes, addTodo};
+    const deleteTodo = (todoId) => {
+        todoes.splice(todoId - 1, 1);
+        todoes.forEach((todo) => {
+            if(todo.id > todoId) {
+                todo.id = todo.id - 1;
+            }
+        })
+    }
+
+    const updateTodo = (todoId, updateContent) => {
+        todoes[todoId - 1].todoSummary = updateContent;
+    }
+
+    return {todoes, addTodo, deleteTodo};
 });

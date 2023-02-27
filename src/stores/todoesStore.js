@@ -4,11 +4,15 @@ import { reactive } from 'vue';
 export const useTodoesStore = defineStore('todoes', () => {
     const todoes = reactive([]);
 
-    const addTodo = (name, date, summary) => {
+    const initTodoes = (defaultTodoes) => {
+        Object.assign(todoes, defaultTodoes);
+    }
+
+    const addTodo = (name, deadline, summary) => {
         todoes.push({
             id: todoes.length + 1,
             todoName: name,
-            todoDate: date,
+            todoDeadline: deadline,
             todoSummary: summary
         });
     }
@@ -22,9 +26,11 @@ export const useTodoesStore = defineStore('todoes', () => {
         })
     }
 
-    const updateTodo = (todoId, updateContent) => {
-        todoes[todoId - 1].todoSummary = updateContent;
+    const updateTodo = (todoId, updatedContent) => {
+        todoes[todoId - 1].todoName = updatedContent.todoName;
+        todoes[todoId - 1].todoDeadline = updatedContent.todoDeadline;
+        todoes[todoId - 1].todoSummary = updatedContent.todoSummary;
     }
 
-    return {todoes, addTodo, deleteTodo};
+    return {todoes, addTodo, deleteTodo, updateTodo, initTodoes};
 });

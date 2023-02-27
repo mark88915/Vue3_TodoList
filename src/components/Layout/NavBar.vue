@@ -40,8 +40,7 @@ a {
     font-size: 20px;
     color: gray;
 
-    &:hover::after {
-        content: "→";
+    &:hover {
         color: black;
     }
 }

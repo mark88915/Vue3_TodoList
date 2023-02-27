@@ -1,20 +1,17 @@
 <script setup>
 import { reactive } from 'vue';
 import { useTodoesStore } from '../stores/todoesStore.js';
+import { preventKeyBoardInputTodoDeadline} from '../util/commonTool.js'
 
 const todoData = reactive({
     todoName: "",
-    todoDate: new Date().toISOString().substring(0, 10),
+    todoDeadline: new Date().toISOString().substring(0, 10),
     todoSummary: "",
 });
 
-const preventKeyBoardInputTodoDate = (e) => {
-    e.preventDefault();
-}
-
 const clearTodoInput = () => {
     todoData.todoName = "";
-    todoData.todoDate = new Date().toISOString().substring(0, 10);
+    todoData.todoDeadline = new Date().toISOString().substring(0, 10);
     todoData.todoSummary = "";
 }
 
@@ -26,7 +23,7 @@ const handleAddTodo = () => {
         return;
     }
 
-    todoesStore.addTodo(todoData.todoName, todoData.todoDate, todoData.todoSummary);
+    todoesStore.addTodo(todoData.todoName, todoData.todoDeadline, todoData.todoSummary);
     clearTodoInput();
 }
 
@@ -40,8 +37,8 @@ const handleAddTodo = () => {
                 <input id="todoName" type="text" v-model="todoData.todoName" />
             </ol>
             <ol>
-                Todo Date：<br>
-                <input id="todoDate" type="date" v-model="todoData.todoDate" @keydown="preventKeyBoardInputTodoDate"/>
+                Todo Deadline：<br>
+                <input id="todoDeadline" type="date" v-model="todoData.todoDeadline" @keydown="preventKeyBoardInputTodoDeadline"/>
             </ol>
             <ol>
                 Todo Summary：<br>
@@ -76,7 +73,7 @@ ol {
     margin: 10px;
 }
 
-#todoName, #todoDate, #todoSummary {
+#todoName, #todoDeadline, #todoSummary {
     font-size: $font_Size;
     width: $inputWidth;
 }
